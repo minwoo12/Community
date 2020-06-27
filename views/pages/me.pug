@@ -1,0 +1,8 @@
+extends ../layout/main
+
+block content
+    .user__me=user.name
+    .user__email=user.email
+    each item in user.boards
+        a(href=routes.boardDetail(item.id))
+            .user__boards=item.title

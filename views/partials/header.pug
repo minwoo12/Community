@@ -1,0 +1,22 @@
+header.nav__header
+    .nav__logo
+        a(href=routes.home) Home
+    .nav__column
+        ul.nav__list
+            li.nav__item 
+                a(href=`/board${routes.boardMain(1)}`) Community
+            li.nav__item
+            li.nav__item
+    .nav__column
+        if !loggedUser
+            ul.nav__confirm
+                li.confirm__item
+                    a(href=routes.signUp) Sign Up
+                li.confirm__item 
+                    a(href=routes.login) Login
+        else
+            ul.nav__confirm
+                li.confirm__item
+                    a(href=routes.me(loggedUser.id))=loggedUser.name
+                li.confirm__item
+                    a(href=routes.logout) Log Out
