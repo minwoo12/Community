@@ -1,0 +1,25 @@
+extends ../../layout/main
+
+block content
+    .user__container
+        .avatar
+            img(src=`/${user.avatar}`, alt="", srcset="")
+            if loggedUser && loggedUser.id === user.id
+                a(href=`/user${routes.avatar}`)
+                    button avatar Edit
+        .avatar__box
+            .user__me Name : #{user.name}
+            .user__email Email : #{user.email}
+            if loggedUser && loggedUser.id === user.id
+                .user__edit
+                    a(href=routes.userEdit(user.id))
+                        button User Edit
+            if loggedUser && loggedUser.id === user.id
+                .changePassword__btn
+                    a(href=`/user${routes.changePassword}`)
+                        button Change Password
+        .board__collection
+            | #{user.name}이 쓴 게시물
+            each item in user.boards
+                a(href=routes.boardDetail(item.id))
+                    .user__boards=item.title

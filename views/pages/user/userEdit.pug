@@ -1,0 +1,8 @@
+extends ../../layout/main
+
+block content
+    .form__container
+        form(action=routes.userEdit(user.id), method="post")
+            input(type="text", name="name", value=user.name, required=true)
+            input(type="email", name="email", value=user.email, required=true)
+            input.input__button(type="submit", value="Edit")

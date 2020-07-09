@@ -1,0 +1,44 @@
+extends ../../layout/main
+
+include ../../mixins/reComment
+include ../../mixins/recursionComment
+block content
+    .boardDetail__container
+        .boardDetail__title=board.title
+        if board.creator.avatar
+            a(href=routes.userDetail(board.creator.id))
+                img(src=`/${board.creator.avatar}`, alt="")
+                .creator=board.creator.name
+        else 
+            a(href=routes.userDetail(board.creator.id))
+                .creator=board.creator.name
+        .boardDetail__content=board.content
+        .boardDetail__commentBox
+            .board__number
+                i.far.fa-comment-alt
+                span#jsBoardNumber=board.comments.length
+            form#jsAddBoardComment
+                input(type="text", placeholder="Write Comment")
+                input(type="submit", value="작성")
+        ul.board__comment-list
+            each comment in board.comments.reverse()
+                li
+                    .comment__user
+                        if comment.avatar
+                            img.comment__img(src=`/${comment.avatar}`, alt="", srcset="")
+                        .comment__creator-info
+                            .comment__creator=comment.creator
+                            .comment__createdAt=comment.createdAt
+                    .comment__content
+                        .comment__text=comment.text
+                        if loggedUser && loggedUser.id === String(comment.creatorId)
+                            .comment__ui
+                                .comment__plus#jsAddBtn 댓글
+                                a.comment__delete(href=routes.deleteBoardComment(comment.id)) 지우기
+                                .comment__edit#jsEditBtn 수정
+                        +reCommentsBlock({
+                            id: comment.id,
+                            reComments
+                        })
+        a.boardDetail__Edit-button(href=routes.boardEdit(board.id))
+            button 글 수정

@@ -3,7 +3,7 @@ import express from "express";
 import routes from "./router";
 import helmet from "helmet";
 import logger from "morgan";
-import middleware from "./middleware";
+import { localMiddleware } from "./middleware";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
@@ -28,6 +28,8 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, `views/pages`));
 
 app.use(helmet());
+app.use("/static", express.static("static"));
+app.use("/upload", express.static("upload"));
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,9 +46,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/static", express.static("static"));
-
-app.use(middleware);
+app.use(localMiddleware);
 
 app.use(routes.home, globalRouter);
 app.use(routes.board, boardRouter);

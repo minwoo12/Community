@@ -1,0 +1,9 @@
+extends ../../layout/main
+
+block content
+    .form__container
+        form(action=`/user${routes.avatar}`, method="post", enctype="multipart/form-data")
+            label(for="avatar") 파일 선택
+                i.fas.fa-caret-square-down
+            input.input__upload(type="file", id="avatar", name="avatar", accept="image/*")
+            input.input__button(type="submit", value="Upload")

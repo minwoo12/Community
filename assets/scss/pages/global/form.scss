@@ -1,0 +1,56 @@
+.form__container {
+  margin-top: 50px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    input:not(:last-child) {
+      border: none;
+      border-bottom: 1px solid rgba($color: gray, $alpha: 0.5);
+      margin-bottom: 20px;
+      &:focus {
+        outline: none;
+      }
+    }
+    .input__button {
+      width: 150px;
+      height: 25px;
+      font-weight: bold;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff9f43;
+      &:hover {
+        color: #ff6b6b;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+    label {
+      margin-bottom: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      background-color: #54a0ff;
+      &:hover {
+        color: #ff6b6b;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+    .input__upload {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+extends ../../layout/main
+
+include ../../mixins/boardBlock
+
+block content
+    .board__container
+        .board__title Community
+        .board__box
+            .board__nav
+                .nav__item NO
+                .nav__item 제목
+                .nav__item 글쓴이
+                .nav__item 작성기간
+                .nav__item 조회수
+            if pages
+                each item in board
+                    if page === String(item.pages)
+                        +boardBlock({
+                            id: item.id,
+                            number: item.number,
+                            title: item.title,
+                            creatorId: item.creator.id,
+                            creator: item.creator.name,
+                            createdAt: item.createdAt,
+                            views: item.views
+                        })
+        ul.board__pageNumber
+            .countPage.hide #{page}
+            i.fas.fa-arrow-alt-circle-left
+            -for(let i=pages; i>0 && i<=pages; i--)
+                a.singleNumber#jsPageNumber(href=`/board${routes.boardMain((pages+1)-i)}`)
+                    li #{(pages+1)-i}
+            i.fas.fa-arrow-alt-circle-right
+        if loggedUser
+            a.boardWrite__button(href=`/board${routes.boardWrite}`)
+                button Write

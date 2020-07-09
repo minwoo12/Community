@@ -1,3 +1,9 @@
 mixin boardBlock(board={})
-    a(href=routes.boardDetail(board.id))
-        .boardBlock__title=board.title
+    .board__content
+        .boardBlock__number=board.number
+        a(href=routes.boardDetail(board.id))
+            .boardBlock__title=board.title
+        a(href=routes.userDetail(board.creatorId))
+            .boardBlock__creator=board.creator
+        .boardBlock__createdAt=board.createdAt
+        .boardBlock__views=board.views

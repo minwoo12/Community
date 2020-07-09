@@ -1,24 +1,26 @@
-1. Home
-2. Search
+[x] Home
+[x] Search
 
 User
 
-1. Sign up
-2. Login
-3. User Detail
-4. User Profile
-   1. Avatar
-5. Edit Profile
-   1. changePassword
-   2. Edit Avatar
+[x] Sign up
+[x] Login
+[ ] User Detail
+   [ ] me
+   [ ] other
+[ ] User Profile
+   [ ] Avatar
+[ ] Edit Profile
+   [ ] changePassword
+   [ ] Edit Avatar
 
 Board
 
-1. BoardMain
-2. BoardDetail
-3. write
-4. editBoard
-5. deleteBoard
-6. Comment
+[ ] BoardMain
+[ ] BoardDetail
+[ ] write
+[ ] editBoard
+[ ] deleteBoard
+[ ] Comment
 
 

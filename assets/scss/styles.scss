@@ -1,1 +1,21 @@
 @import "./reset.scss";
+
+@import "./config/mixin/avatarButton.scss";
+@import "./config/mixin/borderDetailButton.scss";
+
+@import "./paritals/header.scss";
+@import "./paritals/footer.scss";
+
+@import "./pages/global/home.scss";
+@import "./pages/global/form.scss";
+@import "./pages/board/board.scss";
+@import "./pages/board/boardDetail.scss";
+@import "./pages/user/me.scss";
+
+main {
+  height: auto;
+}
+
+.hide {
+  display: none;
+}

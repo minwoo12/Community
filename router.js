@@ -50,11 +50,17 @@ const routes = {
     if (id) {
       return `/user/${id}`;
     } else {
-      return "/user/:id";
+      return "/:id";
     }
   },
-  userEdit: "/:id/edit",
-  changePassword: "/:id/changePassword",
+  userEdit: id => {
+    if (id) {
+      return `/user/${id}/edit`;
+    } else {
+      return "/:id/edit";
+    }
+  },
+  changePassword: "/changePassword",
   userDelete: "/:id/Delete",
   avatar: "/upload",
 
@@ -68,8 +74,7 @@ const routes = {
       return "/:id/delete";
     }
   },
-  editBoardComment: "/:id/edit",
-  addBoardReComment: "/:id/boardReComment"
+  editBoardComment: "/:id/edit"
 };
 
 export default routes;

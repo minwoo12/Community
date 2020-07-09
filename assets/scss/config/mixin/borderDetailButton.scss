@@ -1,0 +1,12 @@
+@mixin borderDetailButton {
+  width: 100px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  background-color: #ff9f43;
+  &:hover {
+    color: #6c5ce7;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+}

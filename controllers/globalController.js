@@ -4,7 +4,7 @@ import Board from "../models/Board";
 import User from "../models/User";
 
 export const home = (req, res) => {
-  res.render("home", { pageTitle: "Home" });
+  res.render("./global/home", { pageTitle: "Home" });
 };
 
 export const search = async (req, res) => {
@@ -19,11 +19,11 @@ export const search = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  res.render("search", { pageTitle: "Search", term, boards });
+  res.render("./global/search", { pageTitle: "Search", term, boards });
 };
 
 export const signUp = (req, res) => {
-  res.render("signUp", { pageTitle: "signUp" });
+  res.render("./global/signUp", { pageTitle: "signUp" });
 };
 
 export const postSignUp = async (req, res) => {
@@ -47,7 +47,7 @@ export const postSignUp = async (req, res) => {
 };
 
 export const login = (req, res) => {
-  res.render("login", { pageTitle: "Login" });
+  res.render("./global/login", { pageTitle: "Login" });
 };
 
 export const postLogin = passport.authenticate("local", {

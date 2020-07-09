@@ -1,6 +1,7 @@
 import Board from "../models/Board";
 import Comment from "../models/Comment";
 import User from "../models/User";
+import reComment from "../models/reComment";
 import moment from "moment";
 import "moment-timezone";
 import routes from "../router";
@@ -9,24 +10,53 @@ export const board = async (req, res) => {
   const {
     params: { page }
   } = req;
-  const board = await Board.find({});
+  const board = await Board.find({})
+    .populate("creator")
+    .sort({ createdAt: -1 });
   const pages = Math.floor(board.length / 10) + 1;
-  console.log(board[19]);
-  res.render("board", { pageTitle: "Community", board, pages, page });
+  res.render("./board/board", {
+    pageTitle: "Community",
+    board,
+    pages,
+    page
+  });
 };
 
 export const boardDetail = async (req, res) => {
   const {
+    query: { reText, commentId },
     params: { id }
   } = req;
   const board = await Board.findById(id)
     .populate("comments")
-    .populate("reComments");
-  res.render("boardDetail", { pageTitle: "boardDetail", board });
+    .populate("creator");
+  board.views += 1;
+  board.save();
+  const reComments = await reComment.find({});
+  let today = moment().format("YYYY-MM-DD HH:mm:ss");
+  const user = await User.findById(req.user.id);
+  const comment = await Comment.findById(commentId).populate("reComments");
+  if (reText) {
+    const newReComment = await reComment.create({
+      text: reText,
+      createdAt: today,
+      creator: user.name,
+      creatorId: user.id,
+      avatar: user.avatar,
+      parentComment: commentId
+    });
+    comment.reComments.push(newReComment.id);
+    comment.save();
+  }
+  res.render("./board/boardDetail", {
+    pageTitle: "boardDetail",
+    board,
+    reComments
+  });
 };
 
 export const boardWrite = (req, res) =>
-  res.render("boardWrite", { pageTitle: "boardWrite" });
+  res.render("./board/boardWrite", { pageTitle: "boardWrite" });
 
 export const postBoardWrite = async (req, res) => {
   const {
@@ -51,7 +81,7 @@ export const postBoardWrite = async (req, res) => {
     res.redirect(routes.boardDetail(newBoard.id));
   } catch (error) {
     console.log(error);
-    res.render("boardWrite", { pageTitle: "Community" });
+    res.render("./board/boardWrite", { pageTitle: "Community" });
   }
 };
 
@@ -61,7 +91,7 @@ export const boardEdit = async (req, res) => {
   } = req;
   try {
     const board = await Board.findById(id);
-    res.render("boardEdit", { pageTitle: "Community", board });
+    res.render("./board/boardEdit", { pageTitle: "Community", board });
   } catch (error) {
     res.status(400);
     res.redirect(routes.home);
@@ -90,7 +120,6 @@ export const boardDelete = async (req, res) => {
   const boards = await Board.find({});
   let boardArray = [];
   boardArray = boards;
-  console.log(boards.length);
   try {
     await Board.findOneAndRemove({ _id: id });
     for (let i = board.number; i <= boards.length; i++) {
@@ -141,10 +170,15 @@ export const postBoardComment = async (req, res) => {
     body: { comment }
   } = req;
   try {
+    let today = moment().format("YYYY-MM-DD HH:mm:ss");
     const board = await Board.findById(id);
     const user = await User.findById(req.user.id);
     const newComment = await Comment.create({
-      text: comment
+      text: comment,
+      createdAt: today,
+      creator: user.name,
+      creatorId: user.id,
+      avatar: user.avatar
     });
     board.comments.push(newComment.id);
     board.save();
@@ -168,28 +202,6 @@ export const postBoardCommentDelete = async (req, res) => {
     res.redirect(routes.boardDetail(boardId));
   } catch (error) {
     console.log(error);
-  }
-};
-
-export const postBoardReComment = async (req, res) => {
-  const {
-    params: { id },
-    body: { comment }
-  } = req;
-  try {
-    const board = await Board.findById(id);
-    const user = await User.findById(req.user.id);
-    const newReComment = await ReComment.create({
-      text: comment
-    });
-    board.reComments.push(newReComment.id);
-    board.save();
-    user.reComments.push(newReComment.id);
-    user.save();
-  } catch (error) {
-    console.log(error);
-  } finally {
-    res.end();
   }
 };
 

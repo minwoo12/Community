@@ -1,0 +1,108 @@
+.boardDetail__container {
+  margin-top: 50px;
+  padding: 0px 100px;
+  .boardDetail__title {
+    margin-bottom: 30px;
+    font-size: 30px;
+  }
+  a {
+    margin-bottom: 30px;
+    display: flex;
+    text-decoration: none;
+    &:link {
+      color: #54a0ff;
+    }
+    &:visited {
+      color: #54a0ff;
+    }
+    img {
+      margin-right: 15px;
+      width: 50px;
+      border-radius: 50%;
+    }
+  }
+  .boardDetail__content {
+    height: 30vh;
+  }
+  .boardDetail__commentBox {
+    margin-bottom: 30px;
+    .board__number {
+      margin-bottom: 20px;
+      font-size: 20px;
+      .fa-comment-alt {
+        margin-right: 10px;
+      }
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      input:first-child {
+        margin-bottom: 10px;
+        width: 500px;
+        height: 50px;
+        &:focus {
+          outline: none;
+        }
+      }
+      input:last-child {
+        @include borderDetailButton();
+      }
+    }
+  }
+  .board__comment-list {
+    li {
+      margin-bottom: 20px;
+      .comment__user {
+        margin-bottom: 20px;
+        display: flex;
+        .comment__img {
+          margin-right: 20px;
+          width: 50px;
+          border-radius: 50%;
+        }
+        .comment__creator-info {
+          .comment__creator {
+            font-size: 14px;
+            margin-bottom: 10px;
+          }
+          .comment__createdAt {
+            color: rgba($color: gray, $alpha: 0.5);
+          }
+        }
+      }
+      .comment__content {
+        margin-left: 70px;
+        .comment__text {
+          margin-bottom: 20px;
+        }
+        .comment__ui {
+          display: flex;
+          div,
+          .comment__delete {
+            margin-right: 10px;
+          }
+        }
+        form {
+          input:first-child {
+            margin-bottom: 10px;
+            width: 500px;
+            height: 50px;
+            &:focus {
+              outline: none;
+            }
+          }
+          input:last-child {
+            @include borderDetailButton();
+          }
+        }
+      }
+    }
+  }
+  .boardDetail__Edit-button {
+    display: flex;
+    justify-content: center;
+    button {
+      @include borderDetailButton();
+    }
+  }
+}

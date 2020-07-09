@@ -1,0 +1,57 @@
+.user__container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  .avatar {
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    a {
+      button {
+        @include avatarButton();
+      }
+    }
+    img {
+      margin-bottom: 20px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
+  }
+  .avatar__box {
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .user__me,
+    .user__email {
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .user__edit {
+      margin-bottom: 10px;
+      a {
+        button {
+          @include avatarButton();
+        }
+      }
+    }
+    .changePassword__btn {
+      a {
+        button {
+          @include avatarButton();
+        }
+      }
+    }
+  }
+  .board__collection {
+    a {
+      text-decoration: none;
+      &:visited {
+        color: black;
+      }
+    }
+  }
+}

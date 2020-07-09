@@ -1,0 +1,17 @@
+@mixin avatarButton() {
+  width: max-content;
+  height: 30px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px solid #74b9ff;
+  border-radius: 10px;
+  background-color: #74b9ff;
+  &:hover {
+    color: #6c5ce7;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  &:focus {
+    outline: none;
+  }
+}

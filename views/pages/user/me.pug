@@ -1,0 +1,22 @@
+extends ../../layout/main
+
+block content
+    .user__container
+        .avatar
+            img(src=`/${user.avatar}`, alt="", srcset="")
+            a(href=`/user${routes.avatar}`)
+                button avatar Edit
+        .avatar__box
+            .user__me Name : #{user.name}
+            .user__email Email : #{user.email}
+            .user__edit
+                a(href=routes.userEdit(user.id))
+                    button User Edit
+            .changePassword__btn
+                a(href=`/user${routes.changePassword}`)
+                    button Change Password
+        .board__collection
+            | 내가 쓴 게시물
+            each item in user.boards
+                a(href=routes.boardDetail(item.id))
+                    .user__boards=item.title

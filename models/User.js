@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     isrequired: "email is required"
   },
+  avatar: String,
   createdAt: String,
   boards: [
     {

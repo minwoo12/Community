@@ -11,7 +11,6 @@ const sendBoardComment = async comment => {
       comment
     }
   });
-  console.log(response);
   if (response.status === 200) {
     window.location.reload();
   }

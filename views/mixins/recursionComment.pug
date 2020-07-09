@@ -1,0 +1,26 @@
+mixin recursion(recur={})
+    form.jsAddBoardReComment.hide
+        input.jsReComment__text(type="text", placeholder="Write Comment")
+        input.jsCommentId.hide(type="text", value=value.id)
+        input(type="submit", value="작성")
+    ul.board__comment-list
+        each item in value.reComments
+            if value.id === item.parentComment
+                li
+                    .comment__user
+                        if item.avatar
+                            img.comment__img(src=`/${item.avatar}`, alt="", srcset="")
+                        .comment__creator-info
+                            .comment__creator=item.creator
+                            .comment__createdAt=item.createdAt
+                    .comment__content
+                        .comment__text=item.text
+                        if loggedUser && loggedUser.id === String(item.creatorId)
+                            .comment__ui
+                                .comment__plus#jsAddBtn 댓글
+                                a.comment__delete(href=routes.deleteBoardComment(item.id)) 지우기
+                                .comment__edit#jsEditBtn 수정
+                        form.jsAddBoardReComment.hide
+                            input.jsReComment__text(type="text", placeholder="Write Comment")
+                            input.jsCommentId.hide(type="text", value=item.id)
+                            input(type="submit", value="작성")
