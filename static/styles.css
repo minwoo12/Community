@@ -290,6 +290,13 @@ table {
     .form__container form .input__upload {
       display: none; }
 
+.search__container {
+  margin-top: 50px;
+  padding: 0px 100px; }
+  .search__container .search__term {
+    margin-bottom: 30px;
+    font-size: 20px; }
+
 .board__container {
   margin-top: 50px;
   padding: 0px 100px; }
